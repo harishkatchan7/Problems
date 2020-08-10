@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int abs(int a,int b){
+        if(a >b){
+            return a-b;
+        } else {
+            return b-a;
+        }
+    }
+    int findTiltUtil(TreeNode* root,int *tilt){
+        if(!root)
+            return 0;
+        int left = findTiltUtil(root->left,tilt);
+        int right = findTiltUtil(root->right,tilt);
+        *tilt+= abs(left,right);
+        return left + right + root->val;
+    }
+    int findTilt(TreeNode* root) {
+        int tilt = 0;
+        findTiltUtil(root,&tilt);
+        return tilt;
+    }
+};
